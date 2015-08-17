@@ -1657,6 +1657,9 @@ mdbm_internal_remap(MDBM *db, size_t dbsize, int flags)
     mdbm_page_t page;
     int got_hdr = 0;
 
+    memset(&page, 0, sizeof(mdbm_page_t));
+    memset(&hdr, 0, sizeof(mdbm_hdr_t));
+
     /* Save a copy of the header, then unmap current db. */
     if (db->db_base) {
         assert(sizeof(hdr) <= db->db_base_len);
