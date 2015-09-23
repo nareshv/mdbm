@@ -10,6 +10,7 @@ HEADERS= \
   mdbm_log.h           \
   mdbm_shmem.h         \
   mdbm_stats.h         \
+  mdbm_cxx.h           \
   mdbm_util.h
 
 

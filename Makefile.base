@@ -34,7 +34,7 @@ endif
 LINK_READLINE=-lreadline
 LDADD += -lm -lpthread -lcrypto -lstdc++
 ifeq ($(UNAME), Linux)
-LIBDIR=/usr/local/lib64
+LIBDIR=/usr/lib64
 else
 LIBDIR=/usr/local/lib
 endif
