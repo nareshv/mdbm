@@ -62,7 +62,9 @@ endif
 
 # assume 64-bit, comment out for 32-bit
 # TODO auto-detect
+ifneq ($(UNAME), Darwin)
 ARCH_SUFFIX=64
+endif
 
 # where to install files:
 #PREFIX=/usr/local
@@ -94,7 +96,7 @@ value_%:
 
 
 make-recursive-%::
-	$(foreach DIR,$(SUBDIRS), make -C $(DIR) $(patsubst make-recursive-%,%,$@) && ) $(TRUECMD)
+	$(foreach DIR,$(SUBDIRS), $(MAKE) -C $(DIR) $(patsubst make-recursive-%,%,$@) && ) $(TRUECMD)
 
 # automaticly perform some actions recursively
 default-make-target: make-recursive-default-make-target
@@ -102,15 +104,15 @@ clean:: make-recursive-clean
 test:: make-recursive-test
 valg:: make-recursive-valg
 profile::
-	make MODE=profile make-recursive-default-make-target
+	$(MAKE) MODE=profile make-recursive-default-make-target
 test-prof::
-	make MODE=profile make-recursive-test
+	$(MAKE) MODE=profile make-recursive-test
 test-fast:: 
-	make FAST=1 make-recursive-test
+	$(MAKE) FAST=1 make-recursive-test
 valg-fast::
-	make FAST=1 make-recursive-valg
+	$(MAKE) FAST=1 make-recursive-valg
 test-prof-fast::
-	make MODE=profile FAST=1  make-recursive-test
+	$(MAKE) MODE=profile FAST=1  make-recursive-test
 
 
 install:: default-make-target make-recursive-install
