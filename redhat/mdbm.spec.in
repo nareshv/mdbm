@@ -24,12 +24,18 @@ Summary:        Mdbm header files.
 
 %description devel
 
+%package perl
+Summary:        Perl bindings for MDBM
+
+%description MDBM Perl bindings
+
 
 %prep
 %setup -qn %{name}-VERSION-0
 
 %build
 make %{?_smp_mflags} LIBDIR=/usr/lib64 INCDIR=/usr/include
+make perl
 
 
 %install
@@ -44,6 +50,11 @@ make PREFIX=%{buildroot}/usr PERL_PREFIX=%{buildroot}/usr LIBDIR=%{buildroot}/us
 
 %files devel
 %{_includedir}/*
+
+%files perl
+%{_libdir}/lib/perl/*
+%{_datadir}/share/perl/*
+%{_mandir}/man3/MDBM_File.3pm
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
